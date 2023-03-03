@@ -6,7 +6,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import TwitterIcon from '@mui/icons-material/Twitter';
 const Home = () => {
   return (
-    <div className='flex flex-col justify-center items-center pt-32 scroll-smooth' id="home">
+    <div className='flex flex-col justify-center items-center pt-32 scroll-smooth px-4' id="home">
         <div className='flex flex-wrap justify-center text-4xl'>
             Hey, I am &nbsp;<span className='text-[#14d0b0] font-bold pt-4 sm:pt-0'> <p className='text-center'>Arka Prabha Chowdhury</p></span>
         </div>

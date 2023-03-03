@@ -9,7 +9,7 @@ const About = () => {
           <img src={me} />
         </div>
         <div className="mt-2">
-          Computer Science undergraduate student at BVRIT and a Front-end
+          Computer Science student at BVRIT and a Front-end
           developer, specializing in ReactJS & TailwindCSS
           <br />
           <br />Web development team lead of Google Developer Student
