@@ -19,7 +19,7 @@ const Skills = () => {
           Github Contributions
         </p>
       </div>
-      <div className="mt-12">
+      <div className="mt-12 px-8">
         <GitHubCalendar username="arkaprabhachowdhury" color={"#17f6d0"}/>
       </div>
     </div>
