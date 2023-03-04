@@ -3,6 +3,13 @@ import learn from "../assets/learn.png";
 import exp from "../assets/exp.png";
 import uni from "../assets/uni.png";
 import Tilt from "react-parallax-tilt";
+import reactjs from "../assets/reactjs.png";
+import nodejs from "../assets/node.png";
+import speechly from "../assets/speech.avif";
+import boot from "../assets/bootstrap.png";
+import { SiFirebase, SiReact,SiMui } from "react-icons/si";
+import { FaNodeJs,FaBootstrap } from "react-icons/fa";
+
 const Projects = () => {
   return (
     <div
@@ -18,6 +25,10 @@ const Projects = () => {
             <p className="text-center">
               A YouTube clone that focuses on education
             </p>
+            <div className="flex justify-center gap-12 pt-4">
+              <SiReact size={"2rem"} />
+              <FaNodeJs size={"2rem"} />
+            </div>
             <div className="flex justify-between">
               <div className="mt-6">
                 <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
@@ -40,62 +51,70 @@ const Projects = () => {
           </div>
         </Tilt>
         <Tilt tiltMaxAngleX={"5"} tiltMaxAngleY={"5"}>
-        <div className="col-span-1 p-8 rounded-md border-2 border-[#12c3a4]">
-          <img src={exp} className="w-full object-cover rounded-2xl" />
-          <p className="text-center pt-6 font-semibold text-xl">xpTrack</p>
-          <p className="text-center">A voice activated expense tracker</p>
-          <div className="flex justify-between">
-            <div className="mt-6">
-              <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
-                <a target={"blank"} href="https://xptrack.netlify.app/">
-                  Live demo
-                </a>
-              </button>
+          <div className="col-span-1 p-8 rounded-md border-2 border-[#12c3a4]">
+            <img src={exp} className="w-full object-cover rounded-2xl" />
+            <p className="text-center pt-6 font-semibold text-xl">xpTrack</p>
+            <p className="text-center">A voice activated expense tracker</p>
+            <div className="flex justify-center gap-12 pt-4">
+              <SiReact size={"2rem"} />
+              <SiMui size={"2rem"}/>
             </div>
-            <div className="mt-6">
-              <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
-                <a
-                  target={"blank"}
-                  href="https://github.com/ArkaPrabhaChowdhury/ExpenseTracker"
-                >
-                  Source code
-                </a>
-              </button>
+            <div className="flex justify-between">
+              <div className="mt-6">
+                <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
+                  <a target={"blank"} href="https://xptrack.netlify.app/">
+                    Live demo
+                  </a>
+                </button>
+              </div>
+              <div className="mt-6">
+                <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
+                  <a
+                    target={"blank"}
+                    href="https://github.com/ArkaPrabhaChowdhury/ExpenseTracker"
+                  >
+                    Source code
+                  </a>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
         </Tilt>
 
         <Tilt tiltMaxAngleX={"5"} tiltMaxAngleY={"5"}>
-        <div className="col-span-1 p-8 rounded-md border-2 border-[#14d0b0]">
-          <img src={uni} className="w-full object-cover rounded-2xl" />
-          <p className="text-center pt-6 font-semibold text-xl">UniGrade</p>
-          <p className="text-center">
-            A one-stop solution for one's college needs{" "}
-          </p>
-          <div className="flex justify-between">
-            <div className="mt-6">
-              <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
-                <a
-                  target={"blank"}
-                  href="https://arkaprabhachowdhury.github.io/Unigrade/"
-                >
-                  Live demo
-                </a>
-              </button>
+          <div className="col-span-1 p-8 rounded-md border-2 border-[#14d0b0]">
+            <img src={uni} className="w-full object-cover rounded-2xl" />
+            <p className="text-center pt-6 font-semibold text-xl">UniGrade</p>
+            <p className="text-center">
+              A one-stop solution for one's college needs{" "}
+            </p>
+            <div className="flex justify-center gap-12 pt-4">
+              <FaBootstrap size={"2rem"} />
+              <SiFirebase  size={"2rem"}/>
             </div>
-            <div className="mt-6">
-              <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
-                <a
-                  target={"blank"}
-                  href="https://github.com/ArkaPrabhaChowdhury/Unigrade"
-                >
-                  Source code
-                </a>
-              </button>
+            <div className="flex justify-between">
+              <div className="mt-6">
+                <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
+                  <a
+                    target={"blank"}
+                    href="https://arkaprabhachowdhury.github.io/Unigrade/"
+                  >
+                    Live demo
+                  </a>
+                </button>
+              </div>
+              <div className="mt-6">
+                <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
+                  <a
+                    target={"blank"}
+                    href="https://github.com/ArkaPrabhaChowdhury/Unigrade"
+                  >
+                    Source code
+                  </a>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
         </Tilt>
       </div>
       <div className="grid grid-cols-3 gap-32 mt-12"></div>

@@ -17,7 +17,7 @@ const Contact = () => {
             rel="noreferrer"
             className="link link--icon"
           >
-            <GitHubIcon />
+            <GitHubIcon className='hover:text-gray-500 rounded-full'/>
           </a>
           <a
             href="mailto:arkopra@gmail.com"
@@ -26,7 +26,7 @@ const Contact = () => {
             aria-label="mail"
             className="link link--icon"
           >
-            <EmailIcon />
+            <EmailIcon className='hover:text-red-400 rounded-full'/>
           </a>
         
           <a
@@ -36,7 +36,7 @@ const Contact = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <LinkedInIcon />
+            <LinkedInIcon className='hover:text-[#0a66c2] rounded-full' />
           </a>
           <a
             href="https://twitter.com/arkopra"
@@ -45,7 +45,7 @@ const Contact = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <TwitterIcon />
+            <TwitterIcon className='hover:text-[#00acee] rounded-full'/>
           </a>
         </div>
     </div>
