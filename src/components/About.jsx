@@ -8,18 +8,23 @@ const About = () => {
         <div className="flex flex-col justify-center items-center w-60">
           <img src={me} />
         </div>
-        <div className="mt-2">
-          Computer Science student at BVRIT and a Front-end
-          developer, specializing in ReactJS & TailwindCSS
+        <div className="mt-2 text-md font-medium">
+          I'm a Computer Science student at BVRIT with expertise in ReactJS and
+          TailwindCSS.
           <br />
-          <br />Web development team lead of Google Developer Student
-          Club(GSDC) at my college <br />
-          <br /> I love guiding peers & I have also created DevSpawn, a
-          community for college freshmen, where I regularly conduct workshops
-          and mentor juniors for free
-          <br/><br/>
-          I regularly contribute to Open source & also casually write technical blogs
-
+          <br />
+          As the Web Development Team Lead at my college's Google Developer
+          Student Club, I lead a team in creating innovative web applications.{" "}
+          <br />
+          <br />
+          I'm also the founder of DevSpawn, a community where I mentor college
+          freshmen and conduct workshops.
+          <br />
+          <br />
+          With over <span className="font-semibold text-lg">10 months </span> of full-stack development internship experience
+          and <span className="font-semibold text-lg">freelance work</span> for GammaInnovations, I've gained practical skills.
+          I actively contribute to open-source projects and write technical
+          blogs to share knowledge.
         </div>
       </div>
     </div>

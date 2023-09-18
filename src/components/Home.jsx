@@ -11,11 +11,10 @@ const Home = () => {
       id="home"
     >
       <div className="flex flex-wrap justify-center text-4xl">
-        Hey, I am &nbsp;
-        <span className="text-[#14d0b0] font-bold pt-4 sm:pt-0">
+        <p className="text-[#14d0b0] font-bold pt-4 sm:pt-0">
           {" "}
           <p className="text-center">Arka Prabha Chowdhury</p>
-        </span>
+        </p>
       </div>
       <div className="py-4 text-2xl text-gray-400 font-semibold">
         <Type />

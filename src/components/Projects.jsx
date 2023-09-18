@@ -2,13 +2,11 @@ import React from "react";
 import learn from "../assets/learn.png";
 import exp from "../assets/exp.png";
 import uni from "../assets/uni.png";
-import Tilt from "react-parallax-tilt";
-import reactjs from "../assets/reactjs.png";
-import nodejs from "../assets/node.png";
-import speechly from "../assets/speech.avif";
-import boot from "../assets/bootstrap.png";
+import gamma from "../assets/gammasite.png";
+import Tilt from "react-parallax-tilt"; 
 import { SiFirebase, SiReact,SiMui } from "react-icons/si";
 import { FaNodeJs,FaBootstrap } from "react-icons/fa";
+import { TbBrandNextjs } from "react-icons/tb";
 
 const Projects = () => {
   return (
@@ -83,21 +81,21 @@ const Projects = () => {
 
         <Tilt tiltMaxAngleX={"5"} tiltMaxAngleY={"5"}>
           <div className="col-span-1 p-8 rounded-md border-2 border-[#14d0b0]">
-            <img src={uni} className="w-full object-cover rounded-2xl" />
-            <p className="text-center pt-6 font-semibold text-xl">UniGrade</p>
+            <img src={gamma} className="w-full object-cover rounded-2xl" />
+            <p className="text-center pt-6 font-semibold text-xl">Gamma Innovations</p>
             <p className="text-center">
-              A one-stop solution for one's college needs{" "}
+              A freelance project for a IT services startup
             </p>
             <div className="flex justify-center gap-12 pt-4">
-              <FaBootstrap size={"2rem"} />
-              <SiFirebase  size={"2rem"}/>
+              <TbBrandNextjs size={"2rem"} />
+              <FaNodeJs size={"2rem"} />
             </div>
             <div className="flex justify-between">
               <div className="mt-6">
                 <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
                   <a
                     target={"blank"}
-                    href="https://arkaprabhachowdhury.github.io/Unigrade/"
+                    href="https://www.gammainnovations.com"
                   >
                     Live demo
                   </a>
@@ -107,7 +105,7 @@ const Projects = () => {
                 <button className="bg-[#12c3a4] text-white p-2 rounded-lg">
                   <a
                     target={"blank"}
-                    href="https://github.com/ArkaPrabhaChowdhury/Unigrade"
+                    href="https://github.com/ArkaPrabhaChowdhury/gamma"
                   >
                     Source code
                   </a>
