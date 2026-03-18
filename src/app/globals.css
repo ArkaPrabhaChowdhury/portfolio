@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f3ee;
+  --foreground: #111111;
+  --card: #ffffff;
+  --muted: #6a6a6a;
+  --accent: #ff6b35;
+  --accent-2: #1f7a8c;
+  --ring: rgba(17, 17, 17, 0.08);
+}
+
+.dark {
+  --background: #0b0f14;
+  --foreground: #f3f3f0;
+  --card: #121822;
+  --muted: #a0a7b4;
+  --accent: #ff8a5c;
+  --accent-2: #4cc9f0;
+  --ring: rgba(243, 243, 240, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.grain {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  opacity: 0.12;
+}
+
+.gridlines {
+  background-image: linear-gradient(
+      rgba(17, 17, 17, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at top, black, transparent 70%);
+}
+
+.glow {
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 107, 53, 0.25),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(31, 122, 140, 0.22),
+      transparent 45%
+    );
+}
