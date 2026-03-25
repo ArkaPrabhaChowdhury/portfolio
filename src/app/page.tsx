@@ -268,16 +268,8 @@ export default function Home() {
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
                   Projects
                 </p>
-                <h2 className="text-3xl font-semibold">Featured build</h2>
+                <h2 className="text-3xl font-semibold">Featured builds</h2>
               </div>
-              <a
-                className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-4 py-2 text-sm font-medium shadow-sm transition hover:-translate-y-0.5"
-                href={projects[0].link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Visit Live
-              </a>
             </div>
             {projects.map((project) => (
               <div key={project.name} className="mt-6 space-y-4">
@@ -288,14 +280,24 @@ export default function Home() {
                       {project.stack} • {project.blurb}
                     </p>
                   </div>
-                  <a
-                    className="text-sm font-medium text-[var(--accent-2)]"
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {project.link.replace("https://", "")}
-                  </a>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <a
+                      className="text-sm font-medium text-[var(--accent-2)]"
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {project.link.replace("https://", "")}
+                    </a>
+                    <a
+                      className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)] transition hover:-translate-y-0.5"
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Visit Live
+                    </a>
+                  </div>
                 </div>
                 <div className="grid gap-2 text-sm text-[var(--muted)]">
                   <p>

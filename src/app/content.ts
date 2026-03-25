@@ -75,6 +75,23 @@ export const experience = [
 
 export const projects = [
   {
+    name: "Learn TCP Proxy, Load Balancer & Rate Limiter",
+    stack: "Go, TCP, Observability Dashboard",
+    link: "https://edge-proxy-go-production.up.railway.app/",
+    blurb: "High-performance TCP proxy + load balancer",
+    outcome:
+      "Delivered a low-latency TCP proxy with real-time observability and sliding-window rate limiting.",
+    challenge:
+      "Built round-robin balancing, live metrics, and rate-limited traffic handling at the TCP layer.",
+    bullets: [
+      "Round-robin load balancing across multiple backend instances for high availability.",
+      "Low-latency TCP proxying from port 8080 to the backend pool.",
+      "Sliding-window rate limiting (5 reqs / 10s) to protect against bursts.",
+      "Real-time observability dashboard with live logs, IP heatmaps, and RPS sparklines.",
+      "Integrated tooling to trigger test bursts directly from the dashboard.",
+    ],
+  },
+  {
     name: "OTT Scout",
     stack: "FastAPI, React, Supabase",
     link: "https://ottscout.vercel.app",
