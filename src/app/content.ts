@@ -77,7 +77,7 @@ export const projects = [
   {
     name: "Learn TCP Proxy, Load Balancer & Rate Limiter",
     stack: "Go, TCP, Observability Dashboard",
-    link: "https://edge-proxy-go-production.up.railway.app/",
+    link: "https://edge.arkocodes.dev/",
     blurb: "High-performance TCP proxy + load balancer",
     outcome:
       "Delivered a low-latency TCP proxy with real-time observability and sliding-window rate limiting.",
@@ -94,7 +94,7 @@ export const projects = [
   {
     name: "OTT Scout",
     stack: "FastAPI, React, Supabase",
-    link: "https://ottscout.vercel.app",
+    link: "https://www.ottscout.arkocodes.dev/",
     blurb: "Streaming Discovery Platform",
     outcome:
       "Improved discovery quality with semantic search plus a ranking + evaluation pipeline.",
