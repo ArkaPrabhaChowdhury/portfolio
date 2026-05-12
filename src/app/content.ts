@@ -75,6 +75,23 @@ export const experience = [
 
 export const projects = [
   {
+    name: "Postmate",
+    stack: "Next.js, Prisma, NextAuth, Groq, Paddle",
+    link: "https://postmate.arkocodes.dev",
+    blurb: "GitHub-to-social content engine for developers",
+    outcome:
+      "Turned real GitHub shipping activity into LinkedIn and X drafts with voice-aware generation, publishing, and scheduling flows.",
+    challenge:
+      "Connected repo sync, commit-level AI generation, voice memory, social publishing, and Pro-gated automation inside one product.",
+    bullets: [
+      "GitHub OAuth and repo sync pipeline with recent commits, changed files, and patch snippets for richer post context.",
+      "Generates LinkedIn and X drafts from single commits, clustered commits, repo showcases, journey arcs, and trend/news inputs.",
+      "Includes saved tone preferences and an auto-generated voice fingerprint built from GitHub profile, commit history, and README context.",
+      "Supports draft editing, scoring, regeneration, LinkedIn posting, and LinkedIn scheduling from the app dashboard.",
+      "Implements Free vs Pro access control with Paddle billing, trial handling, and server-side feature gating.",
+    ],
+  },
+  {
     name: "Learn TCP Proxy, Load Balancer & Rate Limiter",
     stack: "Go, TCP, Observability Dashboard",
     link: "https://edge.arkocodes.dev/",
