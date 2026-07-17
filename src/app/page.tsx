@@ -1,382 +1,440 @@
-﻿"use client";
+"use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import {
-  coreSkills,
-  workingSkills,
-  experience,
-  projects,
-} from "./content";
+import { coreSkills, experience, projects, workingSkills } from "./content";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+function ArrowIcon({ external = false }: { external?: boolean }) {
+  return external ? (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 17 17 7M9 7h8v8" />
+    </svg>
+  ) : (
+    <svg viewBox="0 0 28 18" aria-hidden="true">
+      <path d="M1 9h24M18 2l7 7-7 7" />
+    </svg>
+  );
+}
+
+function ThemeIcon({ theme }: { theme: "light" | "dark" }) {
+  return theme === "dark" ? (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="3.5" />
+      <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" />
+    </svg>
+  ) : (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.2 15.1A8.4 8.4 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" />
+    </svg>
+  );
+}
 
 export default function Home() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const root = useRef<HTMLDivElement>(null);
+  const progress = useRef<HTMLDivElement>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
-    const stored =
-      typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    const prefersDark =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const frame = window.requestAnimationFrame(() => {
+      const current = document.documentElement.dataset.theme;
+      setTheme(current === "light" ? "light" : "dark");
+    });
 
-    const initial =
-      stored === "dark" || (!stored && prefersDark) ? "dark" : "light";
-    setTheme(initial);
-    document.documentElement.classList.toggle("dark", initial === "dark");
+    return () => window.cancelAnimationFrame(frame);
   }, []);
+
+  useGSAP(
+    () => {
+      const media = gsap.matchMedia();
+
+      media.add("(prefers-reduced-motion: no-preference)", () => {
+        const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        intro
+          .from(".site-header", { y: -22, opacity: 0, duration: 0.55 })
+          .to(
+            ".hero-line-inner",
+            { yPercent: 0, duration: 0.8, stagger: 0.09 },
+            "-=0.2",
+          )
+          .from(
+            ".hero-copy > *",
+            { y: 20, opacity: 0, duration: 0.5, stagger: 0.08 },
+            "-=0.45",
+          )
+          .from(
+            ".hero-target",
+            { scale: 0.65, opacity: 0, duration: 0.65 },
+            "-=0.45",
+          );
+
+        gsap.to(progress.current, {
+          scaleX: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.25,
+            markers: false,
+          },
+        });
+
+        gsap.utils.toArray<HTMLElement>(".reveal").forEach((element) => {
+          gsap.from(element, {
+            y: 42,
+            opacity: 0,
+            duration: 0.72,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 84%",
+              once: true,
+              markers: false,
+            },
+          });
+        });
+
+        gsap.from(".tool-item", {
+          x: -24,
+          opacity: 0,
+          duration: 0.45,
+          ease: "power2.out",
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: ".tool-list",
+            start: "top 80%",
+            once: true,
+            markers: false,
+          },
+        });
+
+        gsap.fromTo(
+          ".timeline-line",
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".experience-list",
+              start: "top 72%",
+              end: "bottom 68%",
+              scrub: 1,
+              markers: false,
+            },
+          },
+        );
+
+        gsap.from(".experience-row", {
+          x: 34,
+          opacity: 0,
+          duration: 0.62,
+          ease: "power2.out",
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: ".experience-list",
+            start: "top 76%",
+            once: true,
+            markers: false,
+          },
+        });
+
+        gsap.from(".project-row", {
+          x: 48,
+          opacity: 0,
+          duration: 0.72,
+          ease: "power2.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: ".project-list",
+            start: "top 80%",
+            once: true,
+            markers: false,
+          },
+        });
+
+        gsap.utils.toArray<HTMLElement>(".project-index").forEach((index) => {
+          gsap.to(index, {
+            yPercent: -14,
+            ease: "none",
+            scrollTrigger: {
+              trigger: index.closest(".project-row"),
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1,
+              markers: false,
+            },
+          });
+        });
+
+        const cursor = document.querySelector<HTMLElement>(".cursor-accent");
+        const target = document.querySelector<HTMLElement>(".hero-target");
+
+        if (cursor && window.matchMedia("(pointer: fine)").matches) {
+          const cursorX = gsap.quickTo(cursor, "x", {
+            duration: 0.22,
+            ease: "power3",
+          });
+          const cursorY = gsap.quickTo(cursor, "y", {
+            duration: 0.22,
+            ease: "power3",
+          });
+          const targetX = target
+            ? gsap.quickTo(target, "x", { duration: 0.7, ease: "power3" })
+            : null;
+          const targetY = target
+            ? gsap.quickTo(target, "y", { duration: 0.7, ease: "power3" })
+            : null;
+
+          const onPointerMove = (event: PointerEvent) => {
+            cursorX(event.clientX);
+            cursorY(event.clientY);
+            targetX?.((event.clientX / window.innerWidth - 0.5) * 20);
+            targetY?.((event.clientY / window.innerHeight - 0.5) * 20);
+          };
+
+          window.addEventListener("pointermove", onPointerMove, {
+            passive: true,
+          });
+          gsap.set(cursor, { autoAlpha: 1 });
+
+          return () => window.removeEventListener("pointermove", onPointerMove);
+        }
+      });
+
+      return () => media.revert();
+    },
+    { scope: root },
+  );
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.classList.toggle("dark", next === "dark");
+    document.documentElement.dataset.theme = next;
     localStorage.setItem("theme", next);
+    setTheme(next);
   };
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute inset-0 glow" />
-        <div className="absolute inset-0 gridlines" />
-        <div className="absolute inset-0 grain" />
+    <div ref={root} className="site-shell">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+
+      <div className="scroll-track" aria-hidden="true">
+        <div ref={progress} className="scroll-progress" />
       </div>
+      <div className="cursor-accent" aria-hidden="true" />
+      <div className="noise" aria-hidden="true" />
 
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 py-16 sm:px-10 lg:px-16">
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="absolute right-6 top-6 rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--accent-2)] shadow-sm transition hover:-translate-y-0.5 sm:right-10 sm:top-16 lg:right-16"
-          aria-pressed={theme === "dark"}
-          aria-label="Toggle dark mode"
-        >
-          {theme === "dark" ? "Light Mode" : "Dark Mode"}
-        </button>
+      <header className="site-header">
+        <a className="brand" href="#top" aria-label="Arka Prabha Chowdhury, home">
+          APC
+        </a>
+        <nav className="nav-links" aria-label="Primary navigation">
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          >
+            <ThemeIcon theme={theme} />
+          </button>
+        </nav>
+      </header>
 
-        <section className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-3 rounded-full border border-[color:var(--ring)] bg-[var(--card)]/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)] shadow-sm backdrop-blur">
-              Full Stack Engineer
-              <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
-              Open to Remote (US/EU)
-            </div>
-            <h1 className="text-4xl font-semibold leading-tight text-balance sm:text-5xl lg:text-6xl">
-              Arka Prabha Chowdhury
+      <main id="main-content">
+        <section id="top" className="hero section-grid">
+          <div className="hero-main">
+            <h1>
+              <span className="hero-line">
+                <span className="hero-line-inner">Arka Prabha</span>
+              </span>{" "}
+              <span className="hero-line">
+                <span className="hero-line-inner">Chowdhury</span>
+              </span>
             </h1>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-              Full Stack Engineer (2+ years) — Open to junior–mid remote roles
-            </p>
-            <p className="text-lg leading-relaxed text-[var(--muted)] sm:text-xl">
-              Full Stack Engineer with 2+ years building high-performance web
-              apps and scalable backend systems. Experienced in API design,
-              concurrency, and production optimization.
-            </p>
-            <p className="text-sm text-[var(--muted)]">
-              Based in India (IST) • Can overlap EU/US hours • Open to
-              B2B/contract
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a
-                className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-5 py-2 text-sm font-medium shadow-sm transition hover:-translate-y-0.5"
-                href="mailto:arkopra@gmail.com"
-              >
-                arkopra@gmail.com
-              </a>
-              <a
-                className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-5 py-2 text-sm font-medium shadow-sm transition hover:-translate-y-0.5"
-                href="tel:+917981047462"
-              >
-                +91 79810 47462
-              </a>
+
+            <div className="hero-copy">
+              <p className="hero-role">
+                Full-stack engineer building fast,
+                <br /> reliable products.
+              </p>
+              <p className="hero-summary">
+                I design and ship high-performance web applications, APIs, and
+                backend systems from India for distributed teams.
+              </p>
+              <div className="hero-actions">
+                <a className="primary-action" href="#work">
+                  View selected work <ArrowIcon />
+                </a>
+                <a className="text-action" href="mailto:arkopra@gmail.com">
+                  arkopra@gmail.com <ArrowIcon external />
+                </a>
+              </div>
+              <p className="availability">
+                <span aria-hidden="true" /> Available for remote roles · IST
+                with EU/US overlap
+              </p>
             </div>
           </div>
 
-          <div className="w-full max-w-md space-y-4">
-            <div className="rounded-3xl border border-[color:var(--ring)] bg-[var(--card)]/80 p-6 shadow-xl backdrop-blur">
-              <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                <span>Links</span>
-                <span className="text-[var(--accent-2)]">Live</span>
-              </div>
-              <div className="mt-4 space-y-3 text-sm">
-                 <a
-                  className="flex items-center justify-between gap-3 rounded-2xl border border-[color:var(--ring)] bg-[var(--card)] px-4 py-3 font-medium transition"
-                  href="https://github.com/ArkaPrabhaChowdhury"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span>GitHub</span>
-                  <span className="text-xs text-[var(--muted)]">
-                    github.com/ArkaPrabhaChowdhury
+          <div className="hero-target" aria-hidden="true">
+            <span className="target-horizontal" />
+            <span className="target-vertical" />
+            <span className="target-ring" />
+            <span className="target-dot" />
+          </div>
+        </section>
+
+        <section className="impact-rail reveal" aria-labelledby="impact-title">
+          <h2 id="impact-title" className="section-label">
+            Impact
+          </h2>
+          <div className="impact-item">
+            <strong>~6x</strong>
+            <span>faster checkout</span>
+          </div>
+          <div className="impact-item">
+            <strong>~12x</strong>
+            <span>image throughput</span>
+          </div>
+          <div className="impact-item">
+            <strong>25–35%</strong>
+            <span>fewer API calls</span>
+          </div>
+        </section>
+
+        <section id="experience" className="experience-section">
+          <aside className="tool-panel reveal">
+            <p className="section-label">Primary toolkit</p>
+            <h2>Tools I trust in production</h2>
+            <ul className="tool-list" aria-label="Primary technical skills">
+              {coreSkills.map((skill) => (
+                <li className="tool-item" key={skill}>
+                  <span aria-hidden="true">+</span> {skill}
+                </li>
+              ))}
+            </ul>
+            <details className="tool-details">
+              <summary>See all tools in context</summary>
+              <ul>
+                {workingSkills.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
+            </details>
+          </aside>
+
+          <div className="experience-content">
+            <h2 className="section-heading reveal">Experience</h2>
+            <div className="experience-list">
+              <div className="timeline-line" aria-hidden="true" />
+              {experience.map((role, index) => (
+                <article className="experience-row" key={role.role}>
+                  <span className="timeline-dot" aria-hidden="true" />
+                  <span className="experience-index" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                </a>
-                <a
-                  className="flex items-center justify-between gap-3 rounded-2xl border border-[color:var(--ring)] bg-[var(--card)] px-4 py-3 font-medium transition"
-                  href="https://linkedin.com/in/arka-pra"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span>LinkedIn</span>
-                  <span className="text-xs text-[var(--muted)]">
-                    linkedin.com/in/arka-pra
-                  </span>
-                </a>
-                <a
-                  className="flex items-center justify-between gap-3 rounded-2xl border border-[color:var(--ring)] bg-[var(--card)] px-4 py-3 font-medium transition"
-                  href="https://x.com/arkopra"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span>X</span>
-                  <span className="text-xs text-[var(--muted)]">x.com/arkopra</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-[color:var(--ring)] bg-[var(--card)] p-6 shadow-lg">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                Availability
-              </p>
-              <h3 className="mt-3 text-xl font-semibold">
-                Remote junior–mid roles
-              </h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Remote-friendly,
-                async-first teams.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="grid gap-6 rounded-3xl border border-[color:var(--ring)] bg-[var(--card)]/70 p-8 shadow-lg backdrop-blur lg:grid-cols-[1.2fr_1fr]">
-          <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-              Impact Highlights
-            </p>
-            <h2 className="text-2xl font-semibold">Engineering outcomes</h2>
-            <p className="text-[var(--muted)]">
-              Performance, reliability, and delivery speed improvements across
-              production systems.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              { label: "Checkout performance", value: "~6x faster" },
-              { label: "Image throughput", value: "~12x higher" },
-              { label: "API call reduction", value: "25-35%" },
-            ].map((item) => (
-              <div
-                key={item.label}
-                className="rounded-2xl border border-[color:var(--ring)] bg-[var(--card)] p-4 text-center shadow-sm"
-              >
-                <p className="text-sm text-[var(--muted)]">{item.label}</p>
-                <p className="text-xl font-semibold">{item.value}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-8">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                Core Stack
-              </p>
-              <h2 className="text-3xl font-semibold">Primary toolkit</h2>
-            </div>
-            <p className="max-w-md text-sm text-[var(--muted)]">
-              Focused, production-ready skills used across remote client and
-              product work.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {coreSkills.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-4 py-2 text-sm font-medium shadow-sm"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-              Working Knowledge
-            </p>
-            <h2 className="text-2xl font-semibold">Additional tools</h2>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {workingSkills.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-4 py-2 text-sm font-medium shadow-sm"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-10">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-              Experience
-            </p>
-            <h2 className="text-3xl font-semibold">Selected roles</h2>
-            <p className="mt-2 text-sm text-[var(--muted)]">
-              Remote experience across distributed teams, async collaboration,
-              and client delivery.
-            </p>
-          </div>
-          <div className="space-y-6">
-            {experience.map((role) => (
-              <article
-                key={role.role}
-                className="rounded-3xl border border-[color:var(--ring)] bg-[var(--card)]/80 p-7 shadow-lg backdrop-blur"
-              >
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <h3 className="text-xl font-semibold">{role.role}</h3>
-                    <p className="text-sm text-[var(--muted)]">
-                      {role.company}
-                      {role.location ? ` • ${role.location}` : ""}
-                    </p>
+                  <div className="experience-detail">
+                    <div className="experience-title-row">
+                      <div>
+                        <h3>{role.role}</h3>
+                        <p>{role.company}</p>
+                      </div>
+                      <time>{role.period}</time>
+                    </div>
+                    <ul>
+                      {role.featuredBullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
                   </div>
-                  <span className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-4 py-1 text-sm font-medium text-[var(--muted)]">
-                    {role.period}
-                  </span>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="work" className="work-section">
+          <p className="section-label reveal">Selected work</p>
+          <h2 className="section-heading reveal">Selected work</h2>
+          <div className="project-list">
+            {projects.map((project, index) => (
+              <article className="project-row" key={project.name}>
+                <span className="project-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="project-body">
+                  <h3>{project.displayName}</h3>
+                  <p className="project-stack">{project.displayStack}</p>
+                  <p className="project-outcome">{project.displayOutcome}</p>
                 </div>
-                <ul className="mt-4 grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-                  {role.bullets.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="rounded-2xl border border-[color:var(--ring)] bg-[var(--card)] px-4 py-3"
-                    >
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
+                <a
+                  className="project-link"
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Visit ${project.displayName}`}
+                >
+                  <ArrowIcon /> <span>{project.linkLabel}</span>
+                </a>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
-          <div className="rounded-3xl border border-[color:var(--ring)] bg-[var(--card)]/80 p-8 shadow-lg backdrop-blur">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                  Projects
-                </p>
-                <h2 className="text-3xl font-semibold">Featured builds</h2>
-              </div>
-            </div>
-            {projects.map((project) => (
-              <div key={project.name} className="mt-6 space-y-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <h3 className="text-xl font-semibold">{project.name}</h3>
-                    <p className="text-sm text-[var(--muted)]">
-                      {project.stack} • {project.blurb}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <a
-                      className="text-sm font-medium text-[var(--accent-2)]"
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {project.link.replace("https://", "")}
-                    </a>
-                    <a
-                      className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)] transition hover:-translate-y-0.5"
-                      href={project.link}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Visit Live
-                    </a>
-                  </div>
-                </div>
-                <div className="grid gap-2 text-sm text-[var(--muted)]">
-                  <p>
-                    <span className="font-semibold text-[var(--foreground)]">
-                      Outcome:
-                    </span>{" "}
-                    {project.outcome}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-[var(--foreground)]">
-                      Challenge:
-                    </span>{" "}
-                    {project.challenge}
-                  </p>
-                </div>
-                <ul className="grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-                  {project.bullets.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="rounded-2xl border border-[color:var(--ring)] bg-[var(--card)] px-4 py-3"
-                    >
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <div className="rounded-3xl border border-[color:var(--ring)] bg-[var(--card)]/80 p-8 shadow-lg backdrop-blur">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                Education
-              </p>
-              <h2 className="mt-3 text-2xl font-semibold">
-                B.Tech in Computer Science
-              </h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                BVRIT Hyderabad • 2020 - 2024
-              </p>
-              <div className="mt-5 rounded-2xl border border-[color:var(--ring)] bg-[var(--card)] px-4 py-3 text-sm font-medium">
-                CGPA: 8.6 / 10
-              </div>
-            </div>
-            <div className="rounded-3xl border border-[color:var(--ring)] bg-[var(--card)] p-8 shadow-lg">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
-                Contact
-              </p>
-              <h2 className="mt-3 text-2xl font-semibold">
-                Open to Remote (US/EU)
-              </h2>
-              <p className="mt-3 text-sm text-[var(--muted)]">
-                Reach out for full stack engineering roles and opportunities.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  className="rounded-full border border-[color:var(--ring)] bg-[var(--card)] px-5 py-2 text-sm font-semibold"
-                  href="mailto:arkopra@gmail.com"
-                >
-                  Email Arka
-                </a>
-                <a
-                  className="rounded-full border border-[color:var(--ring)] px-5 py-2 text-sm font-semibold text-[var(--muted)]"
-                  href="https://linkedin.com/in/arka-pra"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Connect on LinkedIn
-                </a>
-              </div>
-            </div>
-          </div>
+        <section id="about" className="education-row reveal">
+          <p className="section-label">Education</p>
+          <p>
+            B.Tech in Computer Science <span>{" · "}</span> BVRIT Hyderabad
+            <span>{" · "}</span> 2020—2024 <span>{" · "}</span> CGPA 8.6/10
+          </p>
         </section>
 
-        <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-[color:var(--ring)] py-6 text-xs text-[var(--muted)]">
-          <span>Arka Prabha Chowdhury</span>
-          <span>Full Stack Engineer</span>
-        </footer>
+        <section id="contact" className="contact-section reveal">
+          <div>
+            <h2>Let’s build something reliable.</h2>
+            <p className="availability">
+              <span aria-hidden="true" /> Open to remote full-stack roles and
+              focused contract work.
+            </p>
+          </div>
+          <div className="contact-links">
+            <a href="mailto:arkopra@gmail.com">
+              arkopra@gmail.com <ArrowIcon />
+            </a>
+            <a
+              href="https://linkedin.com/in/arka-pra"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn <ArrowIcon />
+            </a>
+            <a
+              href="https://github.com/ArkaPrabhaChowdhury"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub <ArrowIcon />
+            </a>
+          </div>
+        </section>
       </main>
+
+      <footer className="site-footer">
+        <span>Arka Prabha Chowdhury</span>
+        <span>India / IST</span>
+        <a href="#top">Back to top ↑</a>
+      </footer>
     </div>
   );
 }
