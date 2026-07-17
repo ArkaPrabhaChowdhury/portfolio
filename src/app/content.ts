@@ -88,11 +88,16 @@ export const experience = [
 export const projects = [
   {
     name: "Postmate",
+    displayName: "Postmate",
     stack: "Next.js, Prisma, NextAuth, Groq, Paddle",
+    displayStack: "Next.js · Prisma · NextAuth · Groq · Paddle",
     link: "https://postmate.arkocodes.dev",
+    linkLabel: "postmate.arkocodes.dev",
     blurb: "GitHub-to-social content engine for developers",
     outcome:
       "Turned real GitHub shipping activity into LinkedIn and X drafts with voice-aware generation, publishing, and scheduling flows.",
+    displayOutcome:
+      "GitHub-to-social drafts with voice-aware generation, publishing, and scheduling.",
     challenge:
       "Connected repo sync, commit-level AI generation, voice memory, social publishing, and Pro-gated automation inside one product.",
     bullets: [
