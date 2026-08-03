@@ -18,72 +18,71 @@ export type GeneratedProject = {
 
 export const generatedProjects: GeneratedProject[] = [
   {
-    "name": "ArkaPrabhaChowdhury/Unigrade",
-    "displayName": "Unigrade",
-    "stack": "HTML, CSS, JavaScript, Bootstrap5, Css3",
-    "displayStack": "HTML · CSS · JavaScript · Bootstrap5 · Css3",
-    "link": "https://github.com/ArkaPrabhaChowdhury/Unigrade",
-    "linkLabel": "ArkaPrabhaChowdhury/Unigrade",
-    "blurb": "A one-stop solution for all college students. Teachers can upload materials, students can interact with each other and with their mentors, compete using quizzes, get career guidance and much more!",
-    "outcome": "A one-stop solution for all college students. Teachers can upload materials, students can interact with each other and with their mentors, compete using quizzes, get career guidance and much more!",
-    "displayOutcome": "A one-stop solution for all college students. Teachers can upload materials, students can interact with each other and with their mentors, compete using quizzes, get career guidance and much more!",
-    "challenge": "A one-stop solution for all college students. Teachers can upload materials, students can interact with each other and with their mentors, compete using quizzes, get career guidance and much more!",
+    "name": "ArkaPrabhaChowdhury/verity",
+    "displayName": "Verity",
+    "stack": "Python, TypeScript, CSS, Dockerfile, Shell, Ai Agents, Autonomous Agents, Go, Llm, Next.js, Research Agent, Searxng",
+    "displayStack": "Python · TypeScript · CSS · Dockerfile · Shell · Ai Agents · Autonomous Agents · Go · Llm · Next.js · Research Agent · Searxng",
+    "link": "https://github.com/ArkaPrabhaChowdhury/verity",
+    "linkLabel": "ArkaPrabhaChowdhury/verity",
+    "blurb": "Evidence-first autonomous research agent with inspectable orchestration, live citations, and reproducible evaluation",
+    "outcome": "Evidence-first autonomous research agent with inspectable orchestration, live citations, and reproducible evaluation",
+    "displayOutcome": "Evidence-first autonomous research agent with inspectable orchestration, live citations, and reproducible evaluation",
+    "challenge": "Evidence-first autonomous research agent with inspectable orchestration, live citations, and reproducible evaluation",
     "bullets": [
-      "Starred on GitHub · Primary language: HTML.",
-      "Topics: bootstrap5, css3."
+      "Starred on GitHub · Primary language: Python.",
+      "Topics: ai-agents, autonomous-agents, golang, llm, nextjs, research-agent, searxng."
     ],
     "skills": [
-      "HTML",
+      "Python",
+      "TypeScript",
       "CSS",
-      "JavaScript",
-      "Bootstrap5",
-      "Css3"
+      "Dockerfile",
+      "Shell",
+      "Ai Agents",
+      "Autonomous Agents",
+      "Go",
+      "Llm",
+      "Next.js",
+      "Research Agent",
+      "Searxng"
     ]
   },
   {
-    "name": "ArkaPrabhaChowdhury/Diabetes_Prediction",
-    "displayName": "Diabetes Prediction",
-    "stack": "Jupyter Notebook",
-    "displayStack": "Jupyter Notebook",
-    "link": "https://github.com/ArkaPrabhaChowdhury/Diabetes_Prediction",
-    "linkLabel": "ArkaPrabhaChowdhury/Diabetes_Prediction",
-    "blurb": "Optimal Classification Algorithm for predicting diabetes",
-    "outcome": "Optimal Classification Algorithm for predicting diabetes",
-    "displayOutcome": "Optimal Classification Algorithm for predicting diabetes",
-    "challenge": "Optimal Classification Algorithm for predicting diabetes",
-    "bullets": [
-      "Starred on GitHub · Primary language: Jupyter Notebook."
-    ],
-    "skills": [
-      "Jupyter Notebook"
-    ]
-  },
-  {
-    "name": "ArkaPrabhaChowdhury/ChatbotAPP",
-    "displayName": "ChatbotAPP",
-    "stack": "Java",
-    "displayStack": "Java",
-    "link": "https://github.com/ArkaPrabhaChowdhury/ChatbotAPP",
-    "linkLabel": "ArkaPrabhaChowdhury/ChatbotAPP",
+    "name": "ArkaPrabhaChowdhury/leetcode-flow-lab",
+    "displayName": "Leetcode Flow Lab",
+    "stack": "JavaScript, CSS, Python, HTML",
+    "displayStack": "JavaScript · CSS · Python · HTML",
+    "link": "https://github.com/ArkaPrabhaChowdhury/leetcode-flow-lab",
+    "linkLabel": "ArkaPrabhaChowdhury/leetcode-flow-lab",
     "blurb": "A project built and maintained on GitHub.",
     "outcome": "A project built and maintained on GitHub.",
     "displayOutcome": "A project built and maintained on GitHub.",
     "challenge": "A project built and maintained on GitHub.",
     "bullets": [
-      "Starred on GitHub · Primary language: Java."
+      "Starred on GitHub · Primary language: JavaScript."
     ],
     "skills": [
-      "Java"
+      "JavaScript",
+      "CSS",
+      "Python",
+      "HTML"
     ]
   }
 ];
 
 export const starredSkills: string[] = [
-  "Bootstrap5",
+  "Ai Agents",
+  "Autonomous Agents",
   "CSS",
-  "Css3",
+  "Dockerfile",
+  "Go",
   "HTML",
-  "Java",
   "JavaScript",
-  "Jupyter Notebook"
+  "Llm",
+  "Next.js",
+  "Python",
+  "Research Agent",
+  "Searxng",
+  "Shell",
+  "TypeScript"
 ];
