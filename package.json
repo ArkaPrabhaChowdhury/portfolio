@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:starred": "node scripts/sync-starred-repositories.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

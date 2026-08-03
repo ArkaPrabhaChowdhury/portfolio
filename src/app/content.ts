@@ -1,3 +1,5 @@
+import { generatedProjects, starredSkills } from "./generated-projects";
+
 export const coreSkills = [
   "TypeScript",
   "React",
@@ -30,6 +32,7 @@ export const workingSkills = [
   "PayPal",
   "Observability",
   "Logging",
+  ...starredSkills,
 ];
 
 export const experience = [
@@ -85,7 +88,7 @@ export const experience = [
   },
 ];
 
-export const projects = [
+const curatedProjects = [
   {
     name: "Postmate",
     displayName: "Postmate",
@@ -153,3 +156,5 @@ export const projects = [
     ],
   },
 ];
+
+export const projects = [...curatedProjects, ...generatedProjects];
