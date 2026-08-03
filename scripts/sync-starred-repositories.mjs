@@ -83,8 +83,12 @@ function buildProject(repository, languages) {
 }
 
 const repositories = await getStarredRepositories();
+const ownProjects = repositories.filter(
+  (repository) =>
+    repository.owner?.login?.toLowerCase() === username.toLowerCase() && !repository.fork,
+);
 const projects = await Promise.all(
-  repositories.map(async (repository) => buildProject(repository, await getJson(repository.languages_url))),
+  ownProjects.map(async (repository) => buildProject(repository, await getJson(repository.languages_url))),
 );
 const skills = unique(projects.flatMap((project) => project.skills)).sort((first, second) => first.localeCompare(second));
 
